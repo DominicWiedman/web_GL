@@ -1,18 +1,17 @@
 import './App.css';
-import {observer} from "mobx-react-lite";
-
-import Counter from "./CounterStore"
+import {inject, observer} from "mobx-react";
 
 import React from "react";
+import counterStore from "./CounterStore";
+
 
 const App = observer(() => {
-
     return (
         <div className="App">
-            <div>{Counter.count}</div>
+            <div>{counterStore.count}</div>
             <button  onClick={() => {
-                Counter.increment()
-            }}>incremet</button>
+                counterStore.increment()
+            }}>increment</button>
 
         </div>
     );

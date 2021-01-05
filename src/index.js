@@ -4,11 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from "mobx-react";
-import Counter from "./CounterStore";
+import counterStore from "./CounterStore";
 
 ReactDOM.render(
   <React.StrictMode>
-      <Provider store={Counter}>
+      <Provider store={counterStore}>
           <App />
       </Provider>
 

@@ -1,6 +1,6 @@
 import {action, observable} from "mobx";
 
-class Counter {
+class CounterStore {
     @observable count = 0;
 
     @action
@@ -8,5 +8,5 @@ class Counter {
         this.count++;
     }
 }
-
-export default new Counter();
+const counterStore = new CounterStore()
+export default counterStore;
