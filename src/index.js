@@ -3,17 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {Provider} from "mobx-react";
+import { Provider} from "mobx-react";
 import counterStore from "./CounterStore";
 
+
 ReactDOM.render(
-  <React.StrictMode>
-      <Provider store={counterStore}>
-          <App />
-      </Provider>
+
+    <Provider store={counterStore}>
+        <App />
+    </Provider>,
 
 
-  </React.StrictMode>,
   document.getElementById('root')
 );
 

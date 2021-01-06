@@ -2,20 +2,20 @@ import './App.css';
 import {inject, observer} from "mobx-react";
 
 import React from "react";
-import counterStore from "./CounterStore";
 
 
-const App = observer(() => {
+const App = inject('store') (observer((props) => {
+    console.log(props.store.count)
     return (
         <div className="App">
-            <div>{counterStore.count}</div>
-            <button  onClick={() => {
-                counterStore.increment()
-            }}>increment</button>
-
+            <div>{props.store.count}</div>
+            <button  onClick={
+                props.store.increment
+            }>incremen</button>
         </div>
     );
-});
-
+}));
 export default App;
+
+
 
