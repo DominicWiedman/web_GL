@@ -4,12 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider} from "mobx-react";
-import counterStore from "./CounterStore";
+import authStore from "./AuthStore";
 
 
 ReactDOM.render(
 
-    <Provider store={counterStore}>
+    <Provider store={authStore}>
         <App />
     </Provider>,
 
