@@ -22,7 +22,7 @@
 
 const Network = async (url, method, body) => {
 
-    return  fetch(`http://localhost:3000/api/${url}`, {
+    return  fetch(`http://localhost:3001/api/${url}`, {
              method: method || 'GET',
              headers: {
                  'Content-Type': 'application/json'

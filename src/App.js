@@ -21,7 +21,7 @@ import NavBar from "./components/NavBar";
 // export default App;
 
 export default function  Homer(){
-    const routes = useRoutes(true)
+    const routes = useRoutes(false)
 
     return(
         <Router>

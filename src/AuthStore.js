@@ -21,6 +21,8 @@ class AuthStore {
 
 
 
+
+
     @action
     SendReg = async event => {
         event.preventDefault()
@@ -31,6 +33,20 @@ class AuthStore {
                 password: this.valuesAuth.password
             };
             await Network('users', 'POST', body)
+        } catch (e) {
+            console.log(e)
+        }
+    };
+    @action
+    SendAuth = async event => {
+        event.preventDefault()
+        try {
+            let body = {
+
+                email: this.valuesAuth.email,
+                password: this.valuesAuth.password
+            };
+            await Network('users/login', 'POST', body)
         } catch (e) {
             console.log(e)
         }

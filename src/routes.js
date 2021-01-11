@@ -3,6 +3,7 @@ import {AuthPage} from "./pages/AuthPage";
 import {HomePage} from "./pages/HomePage";
 import React from "react";
 import {TaskPage} from "./pages/TaskPage";
+import {RegPage} from "./pages/RegPage";
 
 
 export const useRoutes = isAuth => {
@@ -27,6 +28,9 @@ export const useRoutes = isAuth => {
         <Switch>
             <Route path='/home' exact>
                 <HomePage/>
+            </Route>
+            <Route path='/reg' exact>
+                <RegPage/>
             </Route>
             <Route path='/login' exact>
                 <AuthPage/>

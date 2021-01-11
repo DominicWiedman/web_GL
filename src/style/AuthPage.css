@@ -1,11 +1,43 @@
-.button{
+.button {
     width: 200px;
     background-color: #32CD32;
     color: white;
-    margin: 20px;
+    margin: 20px auto;
     border: none;
     padding: 10px;
-    box-shadow: 0 9px 0 -6px #228B22;
-    border-radius: 3px;
+    bottom: 0;
+    box-shadow: 0 5px 11px -5px rgba(34, 139, 34, 0.6);
+    border-radius: 7px;
     font-weight: bold;
+}
+
+
+.main {
+    margin: 25vh auto;
+    display: flex;
+    height: 400px;
+    width: 370px;
+    flex-flow: column nowrap;
+    box-shadow: 4px 5px 27px 0 rgba(34, 60, 80, 0.21);
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.input {
+    width: 70%;
+    padding: 0 0 10px 0;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: transparent;
+    outline: none;
+    transition: 0.3s;
+    margin: 20px auto;
+}
+.form_title{
+    text-align: center;
+    font-weight: normal;
+}
+.new_account{
+    color: #32CD32;
+    text-align: center;
 }
