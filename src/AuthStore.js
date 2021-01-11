@@ -46,7 +46,9 @@ class AuthStore {
                 email: this.valuesAuth.email,
                 password: this.valuesAuth.password
             };
-            await Network('users/login', 'POST', body)
+           const response = await Network('users/login', 'POST', body)
+            // console.log(response.id)
+            localStorage.setItem('token', response.id)
         } catch (e) {
             console.log(e)
         }

@@ -21,7 +21,8 @@ import NavBar from "./components/NavBar";
 // export default App;
 
 export default function  Homer(){
-    const routes = useRoutes(false)
+    const token = localStorage.getItem('token')
+    const routes = useRoutes(token != null)
 
     return(
         <Router>
