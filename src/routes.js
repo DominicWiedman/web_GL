@@ -4,6 +4,7 @@ import {HomePage} from "./pages/HomePage";
 import React from "react";
 import {TaskPage} from "./pages/TaskPage";
 import {RegPage} from "./pages/RegPage";
+import {IsAuthPage} from "./pages/IsAuthPage";
 
 
 export const useRoutes = isAuth => {
@@ -18,7 +19,7 @@ export const useRoutes = isAuth => {
                     <HomePage/>
                 </Route>
                 <Route path='/login' exact>
-                    <AuthPage/>
+                    <IsAuthPage/>
                 </Route>
                 <Redirect to='/tasks'/>
             </Switch>

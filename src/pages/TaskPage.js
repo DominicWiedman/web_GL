@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useEffect} from "react";
+import {inject, observer} from "mobx-react";
 
-export function TaskPage(props){
-    console.log(props.match)
-    return(
-        <h1>
-           Страница тасков
-        </h1>
-    )
-}
+
+export const TaskPage = inject('store')(observer((props) => {
+
+    useEffect(() => {
+        props.store.loadTasks()
+    }, []);
+
+    if (props.store.loader) {
+        return (
+            <h1>Загрузка данных...</h1>
+        )
+    } else {
+        return (
+            <div className='item'>
+                {
+                    props.store.tasks.map((task, index) => (
+                        <div>{task.body}</div>
+                    ))
+                }
+            </div>
+        )
+    }
+
+}));

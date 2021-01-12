@@ -1,5 +1,9 @@
 import {action, makeObservable, observable} from "mobx";
 import Network from "./services/Network";
+import {Redirect, Route, Switch} from "react-router-dom";
+import React from "react";
+import {IsAuthPage} from "./pages/IsAuthPage";
+import {AuthPage} from "./pages/AuthPage";
 
 class AuthStore {
 
@@ -19,6 +23,23 @@ class AuthStore {
         this.valuesAuth[event.target.name] = event.target.value
     };
 
+//this is Tasks Store
+    @observable tasks = [];
+    @observable loader = false;
+
+    @action loadTasks = () => {
+        const token = localStorage.getItem('token')
+        this.loader = true;
+        Network(`tasks?access_token=${token}`)
+            .then(data=>(this.tasks = data))
+            .catch(error=>{
+                console.log(error)
+            })
+            .finally(() => {
+                this.loader = false
+            })
+    }
+
 
 
 
@@ -36,6 +57,8 @@ class AuthStore {
         } catch (e) {
             console.log(e)
         }
+        window.location.reload()
+
     };
     @action
     SendAuth = async event => {
@@ -52,7 +75,16 @@ class AuthStore {
         } catch (e) {
             console.log(e)
         }
+        window.location.reload()
+        (<Redirect to='/tasks'/>)
     };
+
+    @action
+    LogOut = () => {
+         localStorage.removeItem('token')
+        window.location.reload()
+        (<Redirect to='/home'/>)
+    }
 
 
 
