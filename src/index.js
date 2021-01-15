@@ -4,12 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider} from "mobx-react";
-import authStore from "./AuthStore";
+import authStore from "./pages/Auth/AuthStore";
+import tasksStore from "./pages/Tasks/TasksStore";
 
-
+const stores = {authStore, tasksStore}
 ReactDOM.render(
 
-    <Provider store={authStore}>
+    <Provider store={ stores }>
         <App />
     </Provider>,
 

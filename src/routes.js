@@ -1,10 +1,10 @@
 import {Redirect, Switch, Route} from "react-router-dom";
-import {AuthPage} from "./pages/AuthPage";
+import {AuthPage} from "./pages/Auth/AuthPage";
 import {HomePage} from "./pages/HomePage";
 import React from "react";
-import {TaskPage} from "./pages/TaskPage";
-import {RegPage} from "./pages/RegPage";
-import {IsAuthPage} from "./pages/IsAuthPage";
+import {TaskPage} from "./pages/Tasks/TaskPage";
+import {RegPage} from "./pages/Auth/RegPage";
+import {IsAuthPage} from "./pages/Auth/IsAuthPage";
 
 
 export const useRoutes = isAuth => {

@@ -9,7 +9,7 @@ export const IsAuthPage = inject('store')(observer((props) => {
         <>
             <h1>Вы авторизованы!</h1>
 
-                <button onClick={props.store.LogOut} className="button">Выйти</button>
+                <button onClick={props.store.authStore.logOut} className="button">Выйти</button>
 
 </>
 
