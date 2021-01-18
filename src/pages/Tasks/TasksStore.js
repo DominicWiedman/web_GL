@@ -15,40 +15,54 @@ class TasksStore {
         this.addInput = event.target.value;
     };
 
-    @action checkTodo = (todo, event) => {
-        todo.done = !todo.done;
-
-        const index = this.tasks.findIndex(item => item.id === todo.id);
-
-        this.tasks.splice(index, 1, todo);
+    @action checkTodo  = async (todo) => {
+        try {
+            let body = {
+                done: todo.done = !todo.done,
+                id: todo.id
+            };
+            await Network(`tasks/${todo.id}`, 'PATCH', body)
+        } catch (e) {
+            console.log(e)
+        }
     }
 
+    @action
+    deleteTodo = async (todo) => {
+        try {
+            let body = {
+                count: todo.id
+            };
+          const response =  await Network(`tasks/${todo.id}`, 'DELETE', body)
+            this.tasks = this.tasks.filter((task)=>task.id !== todo.id)
+            console.log(response)
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
 
     @action
-    sendTodo = async event => {
-        const token = localStorage.getItem('token')
-        event.preventDefault()
-
+    sendTodo = async () => {
         try {
             let body = {
                 title: 'something',
                 body: this.addInput,
                 done: false
             };
-            await Network(`tasks?access_token=${token}`, 'POST', body)
+          const response =   await Network(`tasks`, 'POST', body)
+            this.tasks = [...this.tasks, response]
+            this.addInput = '';
         } catch (e) {
             console.log(e)
         }
-        window.location.reload()
 
     };
 
 
     @action loadTasks = () => {
-        const token = localStorage.getItem('token')
-
         this.loader = true;
-        Network(`tasks?access_token=${token}`)
+        Network(`tasks`)
             .then(data=>(this.tasks = data))
             .catch(error=>{
                 console.log(error)

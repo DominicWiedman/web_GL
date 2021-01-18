@@ -23,8 +23,11 @@ export const TaskPage = inject('store')(observer((props) => {
                 </div>
 
                 {
-                    props.store.tasksStore.tasks.map((todo, index) => (
-                        <div key={todo.id} className='item'>{todo.body}  <input type="checkbox" checked={todo.done}  onChange={(event) => props.store.tasksStore.checkTodo(todo, event)} /></div>
+                    props.store.tasksStore.tasks.map((todo) => (
+                        <div key={todo.id} className='item'>  <input type="checkbox" checked={todo.done}  onChange={(event) => props.store.tasksStore.checkTodo(todo, event)}/>
+                            {todo.body}
+                            <div onClick={() => props.store.tasksStore.deleteTodo(todo)} className='trash'>X</div>
+                        </div>
                     ))
                 }
 
