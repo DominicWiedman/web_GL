@@ -2,8 +2,7 @@ import {action, makeObservable, observable} from "mobx";
 import Network from "../../services/Network";
 import {Redirect, Route, Switch} from "react-router-dom";
 import React from "react";
-import {IsAuthPage} from "./IsAuthPage";
-import {AuthPage} from "./AuthPage";
+
 
 class AuthStore {
 
@@ -22,10 +21,6 @@ class AuthStore {
     @action setValues = event => {
         this.valuesAuth[event.target.name] = event.target.value
     };
-
-
-
-
 
 
     @action
@@ -49,12 +44,10 @@ class AuthStore {
         event.preventDefault()
         try {
             let body = {
-
                 email: this.valuesAuth.email,
                 password: this.valuesAuth.password
             };
            const response = await Network('users/login', 'POST', body)
-            // console.log(response.id)
             localStorage.setItem('token', response.id)
         } catch (e) {
             console.log(e)
@@ -69,9 +62,6 @@ class AuthStore {
         window.location.reload()
         (<Redirect to='/home'/>)
     }
-
-
-
 }
 
 const authStore = new AuthStore()

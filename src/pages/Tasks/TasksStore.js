@@ -10,12 +10,13 @@ class TasksStore {
     @observable addInput = '';
     @observable tasks = [];
     @observable loader = false;
+    @observable beforeEditCache = '';
 
     @action setAddInput = event => {
         this.addInput = event.target.value;
     };
 
-    @action checkTodo  = async (todo) => {
+    @action checkTodo = async (todo) => {
         try {
             let body = {
                 done: todo.done = !todo.done,
@@ -26,6 +27,23 @@ class TasksStore {
             console.log(e)
         }
     }
+    @action editTodo = async (todo, event) => {
+        const valueEdit = prompt('Измените заметку', this.beforeEditCache = todo.body);
+        if (valueEdit != null) {
+            try {
+                let body = {
+                    body: valueEdit
+                };
+                const response = await Network(`tasks/${todo.id}`, 'PATCH', body)
+
+                this.tasks = this.tasks.filter((task) => task.id !== todo.id)
+                this.tasks = [...this.tasks, response]
+
+            } catch (e) {
+                console.log(e)
+            }
+        }
+    }
 
     @action
     deleteTodo = async (todo) => {
@@ -33,13 +51,12 @@ class TasksStore {
             let body = {
                 count: todo.id
             };
-          const response =  await Network(`tasks/${todo.id}`, 'DELETE', body)
-            this.tasks = this.tasks.filter((task)=>task.id !== todo.id)
+            const response = await Network(`tasks/${todo.id}`, 'DELETE', body)
+            this.tasks = this.tasks.filter((task) => task.id !== todo.id)
             console.log(response)
         } catch (e) {
             console.log(e)
         }
-
     }
 
     @action
@@ -50,7 +67,7 @@ class TasksStore {
                 body: this.addInput,
                 done: false
             };
-          const response =   await Network(`tasks`, 'POST', body)
+            const response = await Network(`tasks`, 'POST', body)
             this.tasks = [...this.tasks, response]
             this.addInput = '';
         } catch (e) {
@@ -63,8 +80,8 @@ class TasksStore {
     @action loadTasks = () => {
         this.loader = true;
         Network(`tasks`)
-            .then(data=>(this.tasks = data))
-            .catch(error=>{
+            .then(data => (this.tasks = data))
+            .catch(error => {
                 console.log(error)
             })
             .finally(() => {
@@ -72,6 +89,7 @@ class TasksStore {
             })
     }
 }
+
 const tasksStore = new TasksStore();
 export default tasksStore;
 
